@@ -1,7 +1,9 @@
 import pytest
 import pandas as pd
 import wandb
+from datetime import datetime
 
+timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
 
 def pytest_addoption(parser):
     parser.addoption("--csv", action="store")
@@ -13,7 +15,7 @@ def pytest_addoption(parser):
 
 @pytest.fixture(scope='session')
 def data(request):
-    run = wandb.init(job_type="data_tests", resume=True)
+    run = wandb.init(job_type="data_tests", name=f"Run_{timestamp}", resume=True)
 
     # Download input artifact. This will also note that this script is using this
     # particular version of the artifact
@@ -29,7 +31,7 @@ def data(request):
 
 @pytest.fixture(scope='session')
 def ref_data(request):
-    run = wandb.init(job_type="data_tests", resume=True)
+    run = wandb.init(job_type="data_tests",  name=f"Run_{timestamp}", resume=True)
 
     # Download input artifact. This will also note that this script is using this
     # particular version of the artifact

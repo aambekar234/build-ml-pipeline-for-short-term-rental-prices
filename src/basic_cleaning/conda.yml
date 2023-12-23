@@ -1,0 +1,10 @@
+name: eda
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - pandas
+  - pip=20.3.3
+  - pip:
+      - wandb==0.10.31

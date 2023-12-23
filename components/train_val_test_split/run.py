@@ -9,14 +9,15 @@ import wandb
 import tempfile
 from sklearn.model_selection import train_test_split
 from wandb_utils.log_artifact import log_artifact
+from datetime import datetime
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)-15s %(message)s")
 logger = logging.getLogger()
 
 
 def go(args):
-
-    run = wandb.init(job_type="train_val_test_split")
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
+    run = wandb.init(job_type="train_val_test_split", name=f"Run_{timestamp}")
     run.config.update(args)
 
     # Download input artifact. This will also note that this script is using this
